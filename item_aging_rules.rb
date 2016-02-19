@@ -5,6 +5,10 @@ class ItemAgingRule
     @quality = starting_quality
     @sell_in = starting_sell_in
   end
+
+  def max_quality
+    50
+  end
 end
 
 class NormalItemAgingRule < ItemAgingRule
@@ -25,10 +29,6 @@ class AgedBrieAgingRule < ItemAgingRule
     @sell_in -= 1
   end
 
-  def max_quality
-    50
-  end
-
   def quality_change_factor
     @sell_in <= 0 ? 2 : 1
   end
@@ -45,10 +45,6 @@ class PassesAgingRule < ItemAgingRule
     @quality = 0 if @sell_in <= 0
     @quality = [@quality, max_quality].min
     @sell_in -= 1
-  end
-
-  def max_quality
-    50
   end
 
   def quality_change_factor
