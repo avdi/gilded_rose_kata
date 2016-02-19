@@ -19,15 +19,19 @@ RSpec.describe "Gilded Rose Item Aging Rules" do
       expect(rule.quality).to eq(9)
     end
 
-    it "reduces quality twice as fast on and after sell by date" do
+    it "reduces quality twice as fast on sell by date" do
       rule = NormalItemAgingRule.new(starting_sell_in: 0,
                                      starting_quality: 10)
       rule.apply
       expect(rule.quality).to eq(8)
-      rule.apply
-      expect(rule.quality).to eq(6)
     end
 
+    it "reduces quality twice as fast after sell by date" do
+      rule = NormalItemAgingRule.new(starting_sell_in: -1,
+                                     starting_quality: 10)
+      rule.apply
+      expect(rule.quality).to eq(8)
+    end
     it "does not allow quality to be less than zero" do
       rule = NormalItemAgingRule.new(starting_quality: 0)
       rule.apply
@@ -44,13 +48,18 @@ RSpec.describe "Gilded Rose Item Aging Rules" do
       expect(rule.quality).to eq(11)
     end
 
-    it "increases quality twice as fast on and after sell by date" do
+    it "increases quality twice as fast on sell by date" do
       rule = AgedBrieAgingRule.new(starting_sell_in: 0,
-                                     starting_quality: 10)
+                                   starting_quality: 10)
       rule.apply
       expect(rule.quality).to eq(12)
+    end
+
+    it "increases quality twice as fast after sell by date" do
+      rule = AgedBrieAgingRule.new(starting_sell_in: -1,
+                                   starting_quality: 10)
       rule.apply
-      expect(rule.quality).to eq(14)
+      expect(rule.quality).to eq(12)
     end
 
     it "does not allow quality to increase to more than 50" do
