@@ -39,12 +39,13 @@ end
 
 class NormalItemAgingRule < ItemAgingRule
   def apply
-    @quality -= 1 * quality_change_factor unless @quality <= 0
+    update_quality
+    constrain_quality
     @sell_in -= 1
   end
 
   def quality_change_factor
-    @sell_in <= 0 ? 2 : 1
+    @sell_in <= 0 ? -2 : -1
   end
 end
 
