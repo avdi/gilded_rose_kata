@@ -30,6 +30,7 @@ class ItemAgingRule
   end
 
   def update_sell_in
+    @sell_in -= 1
   end
 
   def quality_change_factor
@@ -38,24 +39,12 @@ class ItemAgingRule
 end
 
 class NormalItemAgingRule < ItemAgingRule
-  def apply
-    update_quality
-    constrain_quality
-    @sell_in -= 1
-  end
-
   def quality_change_factor
     @sell_in <= 0 ? -2 : -1
   end
 end
 
 class AgedBrieAgingRule < ItemAgingRule
-  def apply
-    update_quality
-    constrain_quality
-    @sell_in -= 1
-  end
-
   def quality_change_factor
     @sell_in <= 0 ? 2 : 1
   end
@@ -65,14 +54,16 @@ class SulfurasAgingRule < ItemAgingRule
   def max_quality
     80
   end
+
+  def update_sell_in
+    # NOOP
+  end
 end
 
 class PassesAgingRule < ItemAgingRule
-  def apply
-    @quality += 1 * quality_change_factor
+  def update_quality
+    super
     @quality = 0 if @sell_in <= 0
-    @quality = [@quality, max_quality].min
-    @sell_in -= 1
   end
 
   def quality_change_factor
