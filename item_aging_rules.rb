@@ -6,8 +6,19 @@ class ItemAgingRule
     @sell_in = starting_sell_in
   end
 
+  def apply
+    update_quality
+    update_sell_in
+  end
+
   def max_quality
     50
+  end
+
+  def update_quality
+  end
+
+  def update_sell_in
   end
 end
 
@@ -35,8 +46,6 @@ class AgedBrieAgingRule < ItemAgingRule
 end
 
 class SulfurasAgingRule < ItemAgingRule
-  def apply
-  end
 end
 
 class PassesAgingRule < ItemAgingRule
