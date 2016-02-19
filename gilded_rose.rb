@@ -20,12 +20,9 @@ end
 def update_quality(items)
   items.each do |item|
     rule = rule_for(item)
-    if rule
-      rule.apply
-      item.sell_in = rule.sell_in
-      item.quality = rule.quality
-      next
-    end
+    rule.apply
+    item.sell_in = rule.sell_in
+    item.quality = rule.quality
   end
 end
 
