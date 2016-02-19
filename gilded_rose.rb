@@ -15,6 +15,12 @@ end
 def update_quality(items)
   items.each do |item|
     rule = rule_for(item)
+    if rule
+      rule.apply
+      item.sell_in = rule.sell_in
+      item.quality = rule.quality
+      next
+    end
     if item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert'
       if item.quality > 0
         if item.name != 'Sulfuras, Hand of Ragnaros'
@@ -56,13 +62,6 @@ def update_quality(items)
         if item.quality < 50
           item.quality += 1
         end
-      end
-    end
-    if rule
-      rule.apply
-      if item.quality != rule.quality ||
-          item.sell_in != rule.sell_in
-        fail "Rule #{rule.inspect} does not match #{item.inspect}"
       end
     end
   end
