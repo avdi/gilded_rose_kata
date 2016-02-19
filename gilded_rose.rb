@@ -2,7 +2,9 @@ def update_quality(items)
   items.each do |item|
     if item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert'
       if item.quality > 0
-        if item.name != 'Sulfuras, Hand of Ragnaros'
+        if item.name == "Conjured Mana Cake"
+          item.quality -= 2
+        elsif item.name != 'Sulfuras, Hand of Ragnaros'
           item.quality -= 1
         end
       end
@@ -30,7 +32,9 @@ def update_quality(items)
       if item.name != "Aged Brie"
         if item.name != 'Backstage passes to a TAFKAL80ETC concert'
           if item.quality > 0
-            if item.name != 'Sulfuras, Hand of Ragnaros'
+            if item.name == "Conjured Mana Cake"
+              item.quality -= 2
+            elsif item.name != 'Sulfuras, Hand of Ragnaros'
               item.quality -= 1
             end
           end
@@ -60,4 +64,3 @@ Item = Struct.new(:name, :sell_in, :quality)
 #   Item.new("Backstage passes to a TAFKAL80ETC concert", 15, 20),
 #   Item.new("Conjured Mana Cake", 3, 6),
 # ]
-
