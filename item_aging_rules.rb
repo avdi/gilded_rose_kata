@@ -52,7 +52,7 @@ end
 class AgedBrieAgingRule < ItemAgingRule
   def apply
     update_quality
-    @quality = [@quality, max_quality].min
+    constrain_quality
     @sell_in -= 1
   end
 
