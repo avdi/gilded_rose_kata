@@ -2,17 +2,21 @@ require "rspec"
 require_relative "item_aging_rules"
 
 RSpec.describe "Gilded Rose Item Aging Rules" do
+  shared_examples_for "a normally aging item" do
+    it "reduces 'sell by' days by 1" do
+      rule = described_class.new(starting_sell_in: 10)
+      rule.apply
+      expect(rule.sell_in).to eq(9)
+    end
+  end
+
   describe NormalItemAgingRule do
+    it_behaves_like "a normally aging item"
+
     it "reduces quality by 1" do
       rule = NormalItemAgingRule.new(starting_quality: 10)
       rule.apply
       expect(rule.quality).to eq(9)
-    end
-
-    it "reduces 'sell by' days by 1" do
-      rule = NormalItemAgingRule.new(starting_sell_in: 10)
-      rule.apply
-      expect(rule.sell_in).to eq(9)
     end
 
     it "reduces quality twice as fast on and after sell by date" do
@@ -32,16 +36,12 @@ RSpec.describe "Gilded Rose Item Aging Rules" do
   end
 
   describe AgedBrieAgingRule do
+    it_behaves_like "a normally aging item"
+
     it "increases quality by 1" do
       rule = AgedBrieAgingRule.new(starting_quality: 10)
       rule.apply
       expect(rule.quality).to eq(11)
-    end
-
-    it "reduces 'sell by' days by 1" do
-      rule = AgedBrieAgingRule.new(starting_sell_in: 10)
-      rule.apply
-      expect(rule.sell_in).to eq(9)
     end
 
     it "increases quality twice as fast on and after sell by date" do
