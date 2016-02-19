@@ -1,9 +1,11 @@
 class NormalItemAgingRule
-  def initialize(item)
-    @item = item
+  attr_reader :quality
+
+  def initialize(starting_quality: 0)
+    @quality = starting_quality
   end
 
   def apply
-    @item.quality -= 1
+    @quality -= 1
   end
 end
