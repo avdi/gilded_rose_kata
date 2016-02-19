@@ -16,9 +16,14 @@ class ItemAgingRule
   end
 
   def update_quality
+    @quality += 1 * quality_change_factor
   end
 
   def update_sell_in
+  end
+
+  def quality_change_factor
+    0
   end
 end
 
@@ -35,7 +40,7 @@ end
 
 class AgedBrieAgingRule < ItemAgingRule
   def apply
-    @quality += 1 * quality_change_factor
+    update_quality
     @quality = [@quality, max_quality].min
     @sell_in -= 1
   end
