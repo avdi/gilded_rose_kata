@@ -5,12 +5,14 @@ def rule_for(item)
   when 'Aged Brie'
     AgedBrieAgingRule.new(starting_quality: item.quality,
                           starting_sell_in: item.sell_in)
-  when 'Backstage passes to a TAFKAL80ETC concert',
-      'Sulfuras, Hand of Ragnaros'
+  when 'Sulfuras, Hand of Ragnaros'
+    SulfurasAgingRule.new(starting_quality: item.quality,
+                          starting_sell_in: item.sell_in)
+  when 'Backstage passes to a TAFKAL80ETC concert'
     nil
   else
     NormalItemAgingRule.new(starting_quality: item.quality,
-      starting_sell_in: item.sell_in)
+                            starting_sell_in: item.sell_in)
   end
 end
 

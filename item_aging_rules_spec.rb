@@ -75,4 +75,18 @@ RSpec.describe "Gilded Rose Item Aging Rules" do
     rule.apply
     expect(rule.quality).to eq(50)
   end
+
+  describe SulfurasAgingRule do
+    it "never gets old" do
+      rule = described_class.new(starting_sell_in: 10)
+      rule.apply
+      expect(rule.sell_in).to eq(10)
+    end
+
+    it "never loses quality" do
+      rule = SulfurasAgingRule.new(starting_quality: 10)
+      rule.apply
+      expect(rule.quality).to eq(10)
+    end
+  end
 end
