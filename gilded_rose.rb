@@ -2,8 +2,10 @@ require_relative "item_aging_rules"
 
 def rule_for(item)
   case item.name
-  when 'Aged Brie',
-      'Backstage passes to a TAFKAL80ETC concert',
+  when 'Aged Brie'
+    AgedBrieAgingRule.new(starting_quality: item.quality,
+                          starting_sell_in: item.sell_in)
+  when 'Backstage passes to a TAFKAL80ETC concert',
       'Sulfuras, Hand of Ragnaros'
     nil
   else
