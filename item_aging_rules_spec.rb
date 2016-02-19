@@ -10,13 +10,13 @@ RSpec.describe "Gilded Rose Item Aging Rules" do
     end
 
     it "reduces 'sell by' days by 1" do
-      rule = NormalItemAgingRule.new(starting_sell_by: 10)
+      rule = NormalItemAgingRule.new(starting_sell_in: 10)
       rule.apply
-      expect(rule.sell_by).to eq(9)
+      expect(rule.sell_in).to eq(9)
     end
 
     it "reduces quality twice as fast on and after sell by date" do
-      rule = NormalItemAgingRule.new(starting_sell_by: 0,
+      rule = NormalItemAgingRule.new(starting_sell_in: 0,
                                      starting_quality: 10)
       rule.apply
       expect(rule.quality).to eq(8)

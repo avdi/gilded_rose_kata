@@ -8,7 +8,7 @@ def rule_for(item)
      nil
   else
     NormalItemAgingRule.new(starting_quality: item.quality,
-                            starting_sell_by: item.sell_in)
+                            starting_sell_in: item.sell_in)
   end
 end
 
