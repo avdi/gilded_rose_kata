@@ -25,7 +25,7 @@ class AgedBrieAgingRule
   end
 
   def apply
-    @quality += 1 * quality_depreciation_factor
+    @quality += 1 * quality_appreciation_factor
     @quality = [@quality, max_quality].min
     @sell_in -= 1
   end
@@ -34,7 +34,7 @@ class AgedBrieAgingRule
     50
   end
 
-  def quality_depreciation_factor
+  def quality_appreciation_factor
     @sell_in <= 0 ? 2 : 1
   end
 end
