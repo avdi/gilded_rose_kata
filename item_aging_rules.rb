@@ -1,4 +1,7 @@
-class NormalItemAgingRule
+class ItemAgingRule
+end
+
+class NormalItemAgingRule < ItemAgingRule
   attr_reader :quality, :sell_in
 
   def initialize(starting_quality: 0, starting_sell_in: Float::INFINITY)
@@ -16,7 +19,7 @@ class NormalItemAgingRule
   end
 end
 
-class AgedBrieAgingRule
+class AgedBrieAgingRule < ItemAgingRule
   attr_reader :quality, :sell_in
 
   def initialize(starting_quality: 0, starting_sell_in: Float::INFINITY)
@@ -39,7 +42,7 @@ class AgedBrieAgingRule
   end
 end
 
-class SulfurasAgingRule
+class SulfurasAgingRule < ItemAgingRule
   attr_reader :quality, :sell_in
 
   def initialize(starting_quality: 0, starting_sell_in: Float::INFINITY)
@@ -51,7 +54,7 @@ class SulfurasAgingRule
   end
 end
 
-class PassesAgingRule
+class PassesAgingRule < ItemAgingRule
   attr_reader :quality, :sell_in
 
   def initialize(starting_quality: 0, starting_sell_in: Float::INFINITY)
