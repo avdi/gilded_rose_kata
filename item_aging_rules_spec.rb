@@ -30,4 +30,33 @@ RSpec.describe "Gilded Rose Item Aging Rules" do
       expect(rule.quality).to eq(0)
     end
   end
+
+  describe AgedBrieAgingRule do
+    it "increases quality by 1" do
+      rule = AgedBrieAgingRule.new(starting_quality: 10)
+      rule.apply
+      expect(rule.quality).to eq(11)
+    end
+
+    it "reduces 'sell by' days by 1" do
+      rule = AgedBrieAgingRule.new(starting_sell_in: 10)
+      rule.apply
+      expect(rule.sell_in).to eq(9)
+    end
+
+    it "increases quality twice as fast on and after sell by date" do
+      rule = AgedBrieAgingRule.new(starting_sell_in: 0,
+                                     starting_quality: 10)
+      rule.apply
+      expect(rule.quality).to eq(12)
+      rule.apply
+      expect(rule.quality).to eq(14)
+    end
+
+    it "does not allow quality to increase to more than 50" do
+      rule = AgedBrieAgingRule.new(starting_quality: 50)
+      rule.apply
+      expect(rule.quality).to eq(50)
+    end
+  end
 end
