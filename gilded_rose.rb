@@ -9,7 +9,8 @@ def rule_for(item)
     SulfurasAgingRule.new(starting_quality: item.quality,
                           starting_sell_in: item.sell_in)
   when 'Backstage passes to a TAFKAL80ETC concert'
-    nil
+    PassesAgingRule.new(starting_quality: item.quality,
+                        starting_sell_in: item.sell_in)
   else
     NormalItemAgingRule.new(starting_quality: item.quality,
                             starting_sell_in: item.sell_in)
