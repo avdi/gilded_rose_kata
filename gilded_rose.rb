@@ -1,5 +1,20 @@
+require_relative "item_aging_rules"
+
+def rule_for(item)
+  case item.name
+  when 'Aged Brie',
+       'Backstage passes to a TAFKAL80ETC concert',
+       'Sulfuras, Hand of Ragnaros'
+     nil
+  else
+    NormalItemAgingRule.new(starting_quality: item.quality,
+                            starting_sell_by: item.sell_in)
+  end
+end
+
 def update_quality(items)
   items.each do |item|
+    rule = rule_for(item)
     if item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert'
       if item.quality > 0
         if item.name != 'Sulfuras, Hand of Ragnaros'
@@ -60,4 +75,3 @@ Item = Struct.new(:name, :sell_in, :quality)
 #   Item.new("Backstage passes to a TAFKAL80ETC concert", 15, 20),
 #   Item.new("Conjured Mana Cake", 3, 6),
 # ]
-
