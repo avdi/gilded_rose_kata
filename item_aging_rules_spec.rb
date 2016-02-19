@@ -14,5 +14,14 @@ RSpec.describe "Gilded Rose Item Aging Rules" do
       rule.apply
       expect(rule.sell_by).to eq(9)
     end
+
+    it "reduces quality twice as fast on and after sell by date" do
+      rule = NormalItemAgingRule.new(starting_sell_by: 0,
+                                     starting_quality: 10)
+      rule.apply
+      expect(rule.quality).to eq(8)
+      rule.apply
+      expect(rule.quality).to eq(6)
+    end
   end
 end
