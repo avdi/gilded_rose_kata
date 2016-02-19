@@ -127,4 +127,34 @@ RSpec.describe "Gilded Rose Item Aging Rules" do
       expect(rule.quality).to eq(50)
     end
   end
+
+  describe NormalItemAgingRule do
+    it_behaves_like "a normally aging item"
+
+    it "reduces quality by 2" do
+      rule = NormalItemAgingRule.new(starting_quality: 10)
+      rule.apply
+      expect(rule.quality).to eq(9)
+    end
+
+    it "reduces quality twice as fast on sell by date" do
+      rule = NormalItemAgingRule.new(starting_sell_in: 0,
+        starting_quality: 10)
+      rule.apply
+      expect(rule.quality).to eq(8)
+    end
+
+    it "reduces quality twice as fast after sell by date" do
+      rule = NormalItemAgingRule.new(starting_sell_in: -1,
+        starting_quality: 10)
+      rule.apply
+      expect(rule.quality).to eq(8)
+    end
+
+    it "does not allow quality to be less than zero" do
+      rule = NormalItemAgingRule.new(starting_quality: 0)
+      rule.apply
+      expect(rule.quality).to eq(0)
+    end
+  end
 end

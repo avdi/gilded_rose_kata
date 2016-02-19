@@ -8,6 +8,8 @@ def rule_for(item)
                 SulfurasAgingRule
               when 'Backstage passes to a TAFKAL80ETC concert'
                 PassesAgingRule
+              when 'Conjured Mana Cake'
+                ConjuredAgingRule
               else
                 NormalItemAgingRule
               end

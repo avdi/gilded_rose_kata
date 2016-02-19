@@ -75,3 +75,9 @@ class PassesAgingRule < ItemAgingRule
     end
   end
 end
+
+class ConjuredAgingRule < ItemAgingRule
+  def quality_change_factor
+    @sell_in <= 0 ? -4 : -2
+  end
+end
