@@ -1,14 +1,13 @@
 class ItemAgingRule
-end
-
-class NormalItemAgingRule < ItemAgingRule
   attr_reader :quality, :sell_in
 
   def initialize(starting_quality: 0, starting_sell_in: Float::INFINITY)
     @quality = starting_quality
     @sell_in = starting_sell_in
   end
+end
 
+class NormalItemAgingRule < ItemAgingRule
   def apply
     @quality -= 1 * quality_depreciation_factor unless @quality <= 0
     @sell_in -= 1
@@ -20,13 +19,6 @@ class NormalItemAgingRule < ItemAgingRule
 end
 
 class AgedBrieAgingRule < ItemAgingRule
-  attr_reader :quality, :sell_in
-
-  def initialize(starting_quality: 0, starting_sell_in: Float::INFINITY)
-    @quality = starting_quality
-    @sell_in = starting_sell_in
-  end
-
   def apply
     @quality += 1 * quality_appreciation_factor
     @quality = [@quality, max_quality].min
@@ -43,25 +35,11 @@ class AgedBrieAgingRule < ItemAgingRule
 end
 
 class SulfurasAgingRule < ItemAgingRule
-  attr_reader :quality, :sell_in
-
-  def initialize(starting_quality: 0, starting_sell_in: Float::INFINITY)
-    @quality = starting_quality
-    @sell_in = starting_sell_in
-  end
-
   def apply
   end
 end
 
 class PassesAgingRule < ItemAgingRule
-  attr_reader :quality, :sell_in
-
-  def initialize(starting_quality: 0, starting_sell_in: Float::INFINITY)
-    @quality = starting_quality
-    @sell_in = starting_sell_in
-  end
-
   def apply
     @quality += 1 * quality_appreciation_factor
     @quality = 0 if @sell_in <= 0
