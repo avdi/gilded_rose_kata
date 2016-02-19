@@ -23,5 +23,11 @@ RSpec.describe "Gilded Rose Item Aging Rules" do
       rule.apply
       expect(rule.quality).to eq(6)
     end
+
+    it "does not allow quality to be less than zero" do
+      rule = NormalItemAgingRule.new(starting_quality: 0)
+      rule.apply
+      expect(rule.quality).to eq(0)
+    end
   end
 end

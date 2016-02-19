@@ -7,7 +7,7 @@ class NormalItemAgingRule
   end
 
   def apply
-    @quality -= 1 * quality_depreciation_factor
+    @quality -= 1 * quality_depreciation_factor unless @quality <= 0
     @sell_by -= 1
   end
 
